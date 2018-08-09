@@ -60,91 +60,91 @@ File: admin-dev/themes/default/template/controllers/search/helpers/view/view.tpl
         <source>1 product</source>
         <target xml:lang="fr">1 produit</target>
         <note>Context:
-File: admin-dev/themes/default/template/controllers/search/helpers/view/view.tpl:115</note>
+File: admin-dev/themes/default/template/controllers/search/helpers/view/view.tpl:116</note>
       </trans-unit>
       <trans-unit id="864c665aea5e824772fda0e678c3ac4d" approved="yes">
         <source>%d products</source>
         <target xml:lang="fr">%d produits</target>
         <note>Context:
-File: admin-dev/themes/default/template/controllers/search/helpers/view/view.tpl:117</note>
+File: admin-dev/themes/default/template/controllers/search/helpers/view/view.tpl:118</note>
       </trans-unit>
       <trans-unit id="f08f35ebaebc5e5037a0b2a3474de8c4" approved="yes">
         <source>1 customer</source>
         <target xml:lang="fr">1 client</target>
         <note>Context:
-File: admin-dev/themes/default/template/controllers/search/helpers/view/view.tpl:129</note>
+File: admin-dev/themes/default/template/controllers/search/helpers/view/view.tpl:130</note>
       </trans-unit>
       <trans-unit id="d5865d192ae31edead7bdea6ed1c85d9" approved="yes">
         <source>%d customers</source>
         <target xml:lang="fr">%d clients</target>
         <note>Context:
-File: admin-dev/themes/default/template/controllers/search/helpers/view/view.tpl:131</note>
+File: admin-dev/themes/default/template/controllers/search/helpers/view/view.tpl:132</note>
       </trans-unit>
       <trans-unit id="6febfe29360949ae825d828fa095b6df" approved="yes">
         <source>1 order</source>
         <target xml:lang="fr">1 commande</target>
         <note>Context:
-File: admin-dev/themes/default/template/controllers/search/helpers/view/view.tpl:142</note>
+File: admin-dev/themes/default/template/controllers/search/helpers/view/view.tpl:143</note>
       </trans-unit>
       <trans-unit id="c0115153d45d00a4510d71e2605196a3" approved="yes">
         <source>%d orders</source>
         <target xml:lang="fr">%d commandes</target>
         <note>Context:
-File: admin-dev/themes/default/template/controllers/search/helpers/view/view.tpl:144</note>
+File: admin-dev/themes/default/template/controllers/search/helpers/view/view.tpl:145</note>
       </trans-unit>
       <trans-unit id="1b339eb691ebd4d2103b8b76de41d321" approved="yes">
         <source>1 addon</source>
         <target xml:lang="fr">1 addon</target>
         <note>Context:
-File: admin-dev/themes/default/template/controllers/search/helpers/view/view.tpl:155</note>
+File: admin-dev/themes/default/template/controllers/search/helpers/view/view.tpl:156</note>
       </trans-unit>
       <trans-unit id="0cbcb09148c0538edfccc2b40d606ae7" approved="yes">
         <source>%d addons</source>
         <target xml:lang="fr">%d addons</target>
         <note>Context:
-File: admin-dev/themes/default/template/controllers/search/helpers/view/view.tpl:157</note>
+File: admin-dev/themes/default/template/controllers/search/helpers/view/view.tpl:158</note>
       </trans-unit>
       <trans-unit id="e77449fd1e8fd61e78e99eac35791ed7" approved="yes">
         <source>Show more results...</source>
         <target xml:lang="fr">Afficher plus de résultats...</target>
         <note>Context:
-File: admin-dev/themes/default/template/controllers/search/helpers/view/view.tpl:171</note>
+File: admin-dev/themes/default/template/controllers/search/helpers/view/view.tpl:172</note>
       </trans-unit>
       <trans-unit id="fdbb3dd95d543d67dc19d9fb3f6c46f4" approved="yes">
         <source>Search doc.prestashop.com</source>
         <target xml:lang="fr">Rechercher sur doc.prestashop.com</target>
         <note>Context:
-File: admin-dev/themes/default/template/controllers/search/helpers/view/view.tpl:182</note>
+File: admin-dev/themes/default/template/controllers/search/helpers/view/view.tpl:183</note>
       </trans-unit>
       <trans-unit id="14bd5dfadc5c57da66495ebc2c8c020b" approved="yes">
         <source>Go to the documentation</source>
         <target xml:lang="fr">Voir la documentation</target>
         <note>Context:
-File: admin-dev/themes/default/template/controllers/search/helpers/view/view.tpl:183</note>
+File: admin-dev/themes/default/template/controllers/search/helpers/view/view.tpl:184</note>
       </trans-unit>
       <trans-unit id="9d6f008f9c1e0446e23b253ecc7b311a" approved="yes">
         <source>Search addons.prestashop.com</source>
         <target xml:lang="fr">Rechercher sur addons.prestashop.com</target>
         <note>Context:
-File: admin-dev/themes/default/template/controllers/search/helpers/view/view.tpl:188</note>
+File: admin-dev/themes/default/template/controllers/search/helpers/view/view.tpl:189</note>
       </trans-unit>
       <trans-unit id="a68b46728e83ba2fd535a25e8216bdb7" approved="yes">
         <source>Go to Addons</source>
         <target xml:lang="fr">Rendez-vous sur Addons</target>
         <note>Context:
-File: admin-dev/themes/default/template/controllers/search/helpers/view/view.tpl:189</note>
+File: admin-dev/themes/default/template/controllers/search/helpers/view/view.tpl:190</note>
       </trans-unit>
       <trans-unit id="96b65991d3a699bf3e83cec22339b620" approved="yes">
         <source>Search prestashop.com forum</source>
         <target xml:lang="fr">Rechercher sur le forum de prestashop.com</target>
         <note>Context:
-File: admin-dev/themes/default/template/controllers/search/helpers/view/view.tpl:194</note>
+File: admin-dev/themes/default/template/controllers/search/helpers/view/view.tpl:195</note>
       </trans-unit>
       <trans-unit id="550b342104e3b39d04e56c346bc6f014" approved="yes">
         <source>Go to the Forum</source>
         <target xml:lang="fr">Rendez-vous sur le forum</target>
         <note>Context:
-File: admin-dev/themes/default/template/controllers/search/helpers/view/view.tpl:195</note>
+File: admin-dev/themes/default/template/controllers/search/helpers/view/view.tpl:196</note>
       </trans-unit>
     </body>
   </file>

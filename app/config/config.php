@@ -19,6 +19,7 @@
     'AdapterSecurityAdminClass' => 'PrestaShop\\PrestaShop\\Adapter\\Security\\Admin',
     'translator.class' => 'PrestaShopBundle\\Translation\\Translator',
     'translator.data_collector' => 'PrestaShopBundle\\Translation\\DataCollectorTranslator',
+    'admin_page' => '%kernel.root_dir%/../src/PrestaShopBundle/Resources/views/Admin',
   ),
   'framework' => 
   array (
@@ -45,6 +46,10 @@
     array (
       'enable_annotations' => true,
     ),
+    'serializer' => 
+    array (
+      'enable_annotations' => true,
+    ),
     'templating' => 
     array (
       'engines' => 
@@ -54,7 +59,6 @@
     ),
     'default_locale' => '%locale%',
     'trusted_hosts' => NULL,
-    'trusted_proxies' => NULL,
     'session' => 
     array (
       'handler_id' => NULL,
@@ -91,7 +95,14 @@
     'strict_variables' => '%kernel.debug%',
     'form_themes' => 
     array (
-      0 => 'PrestaShopBundle:Admin/TwigTemplateForm:bootstrap_3_horizontal_layout.html.twig',
+      0 => 'PrestaShopBundle:Admin/TwigTemplateForm:bootstrap_4_horizontal_layout.html.twig',
+    ),
+    'paths' => 
+    array (
+      '%admin_page%/Product' => 'Product',
+      '%admin_page%/TwigTemplateForm' => 'Twig',
+      '%admin_page%/Configure/AdvancedParameters' => 'AdvancedParameters',
+      '%admin_page%/Configure/ShopParameters' => 'ShopParameters',
     ),
     'globals' => 
     array (
@@ -185,6 +196,10 @@
   array (
     'addons' => 
     array (
+      'prestatrust' => 
+      array (
+        'enabled' => true,
+      ),
       'api_client' => 
       array (
         'ttl' => 7200,

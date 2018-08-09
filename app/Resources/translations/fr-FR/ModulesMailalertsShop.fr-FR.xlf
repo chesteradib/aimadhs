@@ -22,23 +22,13 @@ File: modules/ps_emailalerts/controllers/front/actions.php:144</note>
       </trans-unit>
     </body>
   </file>
-  <file original="modules/ps_emailalerts/views/templates/hook/my-account.tpl" source-language="en" target-language="fr" datatype="plaintext">
+  <file original="modules/ps_emailalerts/views/templates/hook/my-account-footer.tpl" source-language="en" target-language="fr" datatype="plaintext">
     <body>
       <trans-unit id="4edfd10d0bb5f51e0fd2327df608b5a8" approved="yes">
         <source>My alerts</source>
         <target xml:lang="fr">Mes alertes</target>
         <note>Context:
-File: modules/ps_emailalerts/views/templates/hook/my-account.tpl:27</note>
-      </trans-unit>
-    </body>
-  </file>
-  <file original="modules/ps_emailalerts/views/templates/front/mailalerts-account.tpl" source-language="en" target-language="fr" datatype="plaintext">
-    <body>
-      <trans-unit id="8bb23c2ae698681ebb650f43acb54dab" approved="yes">
-        <source>No mail alerts yet.</source>
-        <target xml:lang="fr">Aucune alerte mail.</target>
-        <note>Context:
-File: modules/ps_emailalerts/views/templates/front/mailalerts-account.tpl:37</note>
+File: modules/ps_emailalerts/views/templates/hook/my-account-footer.tpl:27</note>
       </trans-unit>
     </body>
   </file>
@@ -48,13 +38,13 @@ File: modules/ps_emailalerts/views/templates/front/mailalerts-account.tpl:37</no
         <source>your@email.com</source>
         <target xml:lang="fr">votre@email.com</target>
         <note>Context:
-File: modules/ps_emailalerts/views/templates/hook/product.tpl:28</note>
+File: modules/ps_emailalerts/views/templates/hook/product.tpl:30</note>
       </trans-unit>
       <trans-unit id="546e02eaa9a986c83cc347e273269f2c" approved="yes">
         <source>Notify me when available</source>
         <target xml:lang="fr">Prévenez-moi lorsque le produit est disponible</target>
         <note>Context:
-File: modules/ps_emailalerts/views/templates/hook/product.tpl:32</note>
+File: modules/ps_emailalerts/views/templates/hook/product.tpl:37</note>
       </trans-unit>
     </body>
   </file>
