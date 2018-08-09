@@ -12,7 +12,6 @@
 namespace Symfony\Bundle\FrameworkBundle\Console\Descriptor;
 
 use Symfony\Component\Console\Descriptor\DescriptorInterface;
-use Symfony\Component\Console\Helper\Table;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\DependencyInjection\Alias;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -32,7 +31,7 @@ abstract class Descriptor implements DescriptorInterface
     /**
      * @var OutputInterface
      */
-    private $output;
+    protected $output;
 
     /**
      * {@inheritdoc}
@@ -55,10 +54,10 @@ abstract class Descriptor implements DescriptorInterface
                 $this->describeContainerTags($object, $options);
                 break;
             case $object instanceof ContainerBuilder && isset($options['id']):
-                $this->describeContainerService($this->resolveServiceDefinition($object, $options['id']), $options);
+                $this->describeContainerService($this->resolveServiceDefinition($object, $options['id']), $options, $object);
                 break;
             case $object instanceof ContainerBuilder && isset($options['parameter']):
-                $this->describeContainerParameter($object->getParameter($options['parameter']), $options);
+                $this->describeContainerParameter($object->resolveEnvPlaceholders($object->getParameter($options['parameter'])), $options);
                 break;
             case $object instanceof ContainerBuilder:
                 $this->describeContainerServices($object, $options);
@@ -102,51 +101,22 @@ abstract class Descriptor implements DescriptorInterface
     }
 
     /**
-     * Writes content to output.
-     *
-     * @param Table $table
-     * @param bool  $decorated
-     */
-    protected function renderTable(Table $table, $decorated = false)
-    {
-        if (!$decorated) {
-            $table->getStyle()->setCellRowFormat('%s');
-            $table->getStyle()->setCellRowContentFormat('%s');
-            $table->getStyle()->setCellHeaderFormat('%s');
-        }
-
-        $table->render();
-    }
-
-    /**
      * Describes an InputArgument instance.
-     *
-     * @param RouteCollection $routes
-     * @param array           $options
      */
     abstract protected function describeRouteCollection(RouteCollection $routes, array $options = array());
 
     /**
      * Describes an InputOption instance.
-     *
-     * @param Route $route
-     * @param array $options
      */
     abstract protected function describeRoute(Route $route, array $options = array());
 
     /**
      * Describes container parameters.
-     *
-     * @param ParameterBag $parameters
-     * @param array        $options
      */
     abstract protected function describeContainerParameters(ParameterBag $parameters, array $options = array());
 
     /**
      * Describes container tags.
-     *
-     * @param ContainerBuilder $builder
-     * @param array            $options
      */
     abstract protected function describeContainerTags(ContainerBuilder $builder, array $options = array());
 
@@ -158,41 +128,30 @@ abstract class Descriptor implements DescriptorInterface
      *
      * @param Definition|Alias|object $service
      * @param array                   $options
+     * @param ContainerBuilder|null   $builder
      */
-    abstract protected function describeContainerService($service, array $options = array());
+    abstract protected function describeContainerService($service, array $options = array(), ContainerBuilder $builder = null);
 
     /**
      * Describes container services.
      *
      * Common options are:
      * * tag: filters described services by given tag
-     *
-     * @param ContainerBuilder $builder
-     * @param array            $options
      */
     abstract protected function describeContainerServices(ContainerBuilder $builder, array $options = array());
 
     /**
      * Describes a service definition.
-     *
-     * @param Definition $definition
-     * @param array      $options
      */
     abstract protected function describeContainerDefinition(Definition $definition, array $options = array());
 
     /**
      * Describes a service alias.
-     *
-     * @param Alias $alias
-     * @param array $options
      */
-    abstract protected function describeContainerAlias(Alias $alias, array $options = array());
+    abstract protected function describeContainerAlias(Alias $alias, array $options = array(), ContainerBuilder $builder = null);
 
     /**
      * Describes a container parameter.
-     *
-     * @param string $parameter
-     * @param array  $options
      */
     abstract protected function describeContainerParameter($parameter, array $options = array());
 
@@ -201,9 +160,6 @@ abstract class Descriptor implements DescriptorInterface
      *
      * Common options are:
      * * name: name of listened event
-     *
-     * @param EventDispatcherInterface $eventDispatcher
-     * @param array                    $options
      */
     abstract protected function describeEventDispatcherListeners(EventDispatcherInterface $eventDispatcher, array $options = array());
 
@@ -272,10 +228,6 @@ abstract class Descriptor implements DescriptorInterface
         // Some service IDs don't have a Definition, they're simply an Alias
         if ($builder->hasAlias($serviceId)) {
             return $builder->getAlias($serviceId);
-        }
-
-        if ('service_container' === $serviceId) {
-            return $builder;
         }
 
         // the service has been injected in some special way, just return the service

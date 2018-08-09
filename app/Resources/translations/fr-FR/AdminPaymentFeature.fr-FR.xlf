@@ -40,13 +40,13 @@ File: controllers/admin/AdminPaymentPreferencesController.php:262</note>
         <source>Active payment</source>
         <target xml:lang="fr">Modules de paiement actifs</target>
         <note>Context:
-File: controllers/admin/AdminPaymentController.php:128</note>
+File: controllers/admin/AdminPaymentController.php:125</note>
       </trans-unit>
       <trans-unit id="b89c0bf4a33aa644189880a46ac301fd" approved="yes">
         <source>Recommended payment gateways</source>
         <target xml:lang="fr">Modules de paiement recommandés</target>
         <note>Context:
-File: controllers/admin/AdminPaymentController.php:133</note>
+File: controllers/admin/AdminPaymentController.php:130</note>
       </trans-unit>
     </body>
   </file>

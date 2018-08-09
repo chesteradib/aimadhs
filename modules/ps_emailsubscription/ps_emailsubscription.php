@@ -1,6 +1,6 @@
 <?php
 /*
-* 2007-2016 PrestaShop
+* 2007-2017 PrestaShop
 *
 * NOTICE OF LICENSE
 *
@@ -19,7 +19,7 @@
 * needs please refer to http://www.prestashop.com for more information.
 *
 *  @author PrestaShop SA <contact@prestashop.com>
-*  @copyright  2007-2016 PrestaShop SA
+*  @copyright  2007-2017 PrestaShop SA
 *  @license    http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
 *  International Registered Trademark & Property of PrestaShop SA
 */
@@ -45,7 +45,7 @@ class Ps_Emailsubscription extends Module implements WidgetInterface
         $this->name = 'ps_emailsubscription';
         $this->need_instance = 0;
 
-        $this->controllers = array('verification');
+        $this->controllers = array('verification', 'subscription');
 
         $this->bootstrap = true;
         parent::__construct();
@@ -57,7 +57,7 @@ class Ps_Emailsubscription extends Module implements WidgetInterface
 
         $this->entity_manager = $entity_manager;
 
-        $this->version = '2.0.0';
+        $this->version = '2.3.0';
         $this->author = 'PrestaShop';
         $this->error = false;
         $this->valid = false;
@@ -97,6 +97,10 @@ class Ps_Emailsubscription extends Module implements WidgetInterface
                     'displayFooterBefore',
                     'actionCustomerAccountAdd',
                     'additionalCustomerFormFields',
+                    'displayAdminCustomersForm',
+                    'registerGDPRConsent',
+                    'actionDeleteGDPRCustomer',
+                    'actionExportGDPRData'
                 )
             )
         ) {
@@ -329,7 +333,7 @@ class Ps_Emailsubscription extends Module implements WidgetInterface
     /**
      * Register in email subscription.
      */
-    protected function newsletterRegistration()
+    public function newsletterRegistration()
     {
         if (empty($_POST['email']) || !Validate::isEmail($_POST['email'])) {
             return $this->error = $this->trans('Invalid email address.', array(), 'Shop.Notifications.Error');
@@ -750,6 +754,7 @@ class Ps_Emailsubscription extends Module implements WidgetInterface
     public function renderWidget($hookName = null, array $configuration = [])
     {
         $this->smarty->assign($this->getWidgetVariables($hookName, $configuration));
+        $this->context->smarty->assign(array('id_module' => $this->id));
 
         return $this->fetch('module:ps_emailsubscription/views/templates/hook/ps_emailsubscription.tpl');
     }
@@ -1214,4 +1219,62 @@ class Ps_Emailsubscription extends Module implements WidgetInterface
             $this->trans('You may unsubscribe at any moment. For that purpose, please find our contact info in the legal notice.', array(), 'Modules.Emailsubscription.Shop', $locale)
         ;
     }
+
+    /**
+     * This hook allow you to add new fields in the admin customer form
+     * @return string
+     */
+    public function hookDisplayAdminCustomersForm()
+    {
+        $newsletter = Db::getInstance(_PS_USE_SQL_SLAVE_)->getValue('SELECT `newsletter`
+            FROM ' . _DB_PREFIX_ . 'customer
+            WHERE `id_customer` = ' . (int)Tools::getValue('id_customer', 0));
+
+        $input = array(
+            'type' => 'switch',
+            'label' => $this->trans('Newsletter', array(), 'Admin.Orderscustomers.Feature'),
+            'name' => 'newsletter',
+            'required' => false,
+            'class' => 't',
+            'is_bool' => true,
+            'value' => $newsletter,
+            'values' => array(
+                array(
+                    'id' => 'newsletter_on',
+                    'value' => 1,
+                    'label' => $this->trans('Enabled', array(), 'Admin.Global'),
+                ),
+                array(
+                    'id' => 'newsletter_off',
+                    'value' => 0,
+                    'label' => $this->trans('Disabled', array(), 'Admin.Global'),
+                )
+            ),
+            'hint' => $this->trans('This customer will receive your newsletter via email.', array(), 'Admin.Orderscustomers.Help'),
+        );
+        $this->context->smarty->assign(array('input' => $input));
+
+        return $this->display(__FILE__, 'views/templates/admin/newsletter_subscribe.tpl');
+    }
+
+    public function hookActionDeleteGDPRCustomer($customer)
+    {
+        if (!empty($customer['email']) && Validate::isEmail($customer['email'])) {
+            $sql = "DELETE FROM "._DB_PREFIX_."emailsubscription WHERE email = '".pSQL($customer['email'])."'";
+            if (Db::getInstance()->execute($sql)) {
+                return json_encode(true);
+            }
+            return json_encode($this->l('Newsletter subscription: Unable to delete customer using email.'));
+        }
+    }
+    public function hookActionExportGDPRData($customer)
+    {
+        if (!Tools::isEmpty($customer['email']) && Validate::isEmail($customer['email'])) {
+            $sql = "SELECT * FROM "._DB_PREFIX_."emailsubscription WHERE email = '".pSQL($customer['email'])."'";
+            if ($res = Db::getInstance()->ExecuteS($sql)) {
+                return json_encode($res);
+            }
+            return json_encode($this->l('Newsletter subscription: Unable to export customer using email.'));
+       }
+   }
 }

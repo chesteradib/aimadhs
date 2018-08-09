@@ -56,7 +56,7 @@ class Ps_MainMenu extends Module implements WidgetInterface
     {
         $this->name = 'ps_mainmenu';
         $this->tab = 'front_office_features';
-        $this->version = '2.0.2';
+        $this->version = '2.1.1';
         $this->author = 'PrestaShop';
 
         $this->bootstrap = true;
@@ -92,7 +92,7 @@ class Ps_MainMenu extends Module implements WidgetInterface
         }
 
         if ($delete_params) {
-            if (!$this->installDb() || !Configuration::updateGlobalValue('MOD_BLOCKTOPMENU_ITEMS', 'CAT3,CAT26')) {
+            if (!$this->installDb() || !Configuration::updateGlobalValue('MOD_BLOCKTOPMENU_ITEMS', 'CAT3,CAT6,CAT9')) {
                 return false;
             }
         }
@@ -275,7 +275,7 @@ class Ps_MainMenu extends Module implements WidgetInterface
                         $label[$lang['id_lang']] = Tools::getValue('label_'.(int)$lang['id_lang']);
                     }
 
-                    Ps_MenuTopLinks::update($link, $label, $new_window, (int)$id_shop, (int)$id_linksmenutop, (int)$id_linksmenutop);
+                    Ps_MenuTopLinks::update($link, $label, $new_window, (int)$id_shop, (int)$id_linksmenutop);
                     $this->_html .= $this->displayConfirmation($this->trans('The link has been edited.', array(), 'Modules.Mainmenu.Admin'));
                 }
                 $update_cache = true;
@@ -942,7 +942,7 @@ class Ps_MainMenu extends Module implements WidgetInterface
 
     protected function getCacheDirectory()
     {
-        return _PS_CACHE_DIR_ . DIRECTORY_SEPARATOR . 'ps_mainmenu';
+        return _PS_CACHE_DIR_ . 'ps_mainmenu';
     }
 
     protected function clearMenuCache()
